@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+# from .models import Member, Quarter, Port
 # Create your views here.
 
 # 첫 화면

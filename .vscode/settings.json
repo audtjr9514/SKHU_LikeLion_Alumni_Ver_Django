@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "alumni\\Scripts\\python.exe"
+    "python.pythonPath": "alumni\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
 }

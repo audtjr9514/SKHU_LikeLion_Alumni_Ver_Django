@@ -32,4 +32,5 @@
 
 ## DataBase Designing
 
-![DB Designing](D:\2. 멋쟁이 사자처럼\2019년 7기 운영진\6. Alumni Dajngo_ver\LL_SKHU_Alumni\DB Designing.JPG)
+![DB Designing]([https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB%20Designing.JPG](https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB Designing.JPG))
+

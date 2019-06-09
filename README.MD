@@ -32,5 +32,4 @@
 
 ## DataBase Designing
 
-![DB Designing]([https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB%20Designing.JPG])
-
+![DataBase]([https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB_Designing.JPG](https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB_Designing.JPG))

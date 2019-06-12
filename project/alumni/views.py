@@ -1,10 +1,11 @@
 from django.shortcuts import render
-# from .models import Member, Quarter, Port
+from .models import Member, Term, Port
 # Create your views here.
 
 # 첫 화면
 def index(request):
-    return render(request, 'index.html')
+    terms = Term.objects
+    return render(request, 'index.html', {'terms':terms})
 
 # 현재까지 멋쟁이 사자처럼의 회원
 def members(request):

@@ -1,5 +1,10 @@
-index
+{% extends 'layout.html' %}
+{% load staticfiles%}
+{% block content %}
+index<br>
 
 {% for term in terms.all %}
-{{ term.term }}<br>
+기수 :  {{ term.term }}<br>
 {% endfor %}
+
+{% endblock %}

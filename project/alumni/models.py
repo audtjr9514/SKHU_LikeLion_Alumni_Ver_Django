@@ -18,6 +18,7 @@ class Member(models.Model):
     def __str__(self):
         return self.name
 
+
 class Port(models.Model):
     title = models.CharField(max_length=30) # 제목
     Content = models.TextField()            # 내용

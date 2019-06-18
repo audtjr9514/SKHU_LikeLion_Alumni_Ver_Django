@@ -1,0 +1,67 @@
+
+/*bottom*/
+
+.btn {
+  padding: .66em 2.25em;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  font-family: 'GoyangDeogyang';
+}
+.btn:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0.125em;
+  left: 0.125em;
+  
+}
+.btn:active {
+  transform: translate(0.125em, 0.125em);
+}
+.btn:active:after {
+  transform: translate(-0.125em, -0.125em);
+}
+
+.btn-outline-fill {
+  color: orange;
+  box-shadow: inset 0 0 0 0.125em #fd8a17;
+  background-color: transparent;
+  transition: color 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+.btn-outline-fill:after {
+  border-color: #fd8a17;
+}
+.btn-outline-fill:hover {
+  color: white;
+  background-color:#fd8a17;
+  box-shadow: inset 0 0 0 0.125em transparent;
+}
+
+.maintext{
+   font-family: 'GoyangDeogyang';
+}
+
+.btn-outline {
+  color:white;
+  box-shadow: inset 0 0 0 0.125em #fd8a17;
+  background-color: transparent;
+  transition: color 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out;
+}
+.btn-outline:after {
+  border-color: #fd8a17;
+}
+.btn-outline:hover {
+  color: white;
+  background-color:#fd8a17;
+  box-shadow: inset 0 0 0 0.125em transparent;
+}
+.col-md-5{
+  margin-top: 3rem
+}
+.carousel-caption
+{
+ font-family: 'GoyangDeogyang'; 
+}

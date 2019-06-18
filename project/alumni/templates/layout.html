@@ -1,0 +1,291 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LikeLion_SKHU_Alumni</title>
+  {% comment %} <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %> {% endcomment %}
+  {% comment %} <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> {% endcomment %}
+  {% comment %} <meta name="csrf-token" content="{{ csrf_token() }}"> {% endcomment %}
+  <link rel="shortcut icon" type="image/x-icon" href="/static/images/favicon.ico">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container2">
+ 
+ <!--nav-->
+ <nav>
+         <div id='cssmenu'>
+      <li><h4 id="logostay"><img href='#' src="static/images/likelion_logo1" height="20em" width="50em">LikeLion at SKHU</h4></li>
+      <ul>
+         <li><a data-toggle="modal" data-target="#exampleModal"  href='#동방'>donation</a></li>
+          <!--#동방은 nav위에 donation에 마우스를 올렷을때 손모양으로 바꾸려고 삽입-->
+          
+         <!-- nav donation Modal -->
+         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                 <h5 class="modal-title" id="exampleModalLabel">동방 기부 물품</h5>
+                 <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                 <!--  <span aria-hidden="true">&times;</span>-->
+                 <!--</button>-->
+              </div>
+              <div class="modal-body">
+                러그 : <strong>하주현</strong><br><br>
+                전기장판 : <strong>이혜민</strong><br><br>
+                이불 : <strong>장희승</strong><br><br>
+                벽시계 : <strong>하주현</strong><br><br>
+                책상 : <strong>조민국 박결</strong><br><br>
+                모니터 : <strong>박결</strong><br><br>
+                베개 : <strong>조민국</strong><br><br>
+                베갯잎 : <strong>김명석</strong><br><br>
+                거울 : <strong>김명석</strong><br><br>
+                돕바 : <strong>조민국</strong><br><br>
+                좌식 테이블 : <strong>장희승 함진경</strong><br><br><br><br><br>
+                동방 주소 : <br><br>
+                서울특별시 구로구 항동 1-1 성공회대학교 나눔관(5번 건물) 5A114 실
+              </div>
+              <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+         
+         <li><a href='/tutors'>Tutor</a></li>
+         <li><a href='/members'>Member</a></li>
+         <li><a href='/portfolios'>Portfolios</a></li>
+         <li><a href='/'>Home</a></li>
+      </ul>
+      </div>
+
+      <!--nav 화살표 script-->
+      <script>
+        (function($) {
+
+  $.fn.menumaker = function(options) {
+      
+      var cssmenu = $(this), settings = $.extend({
+        title: "Menu",
+        format: "dropdown",
+        breakpoint: 768,
+        sticky: false
+      }, options);
+
+      return this.each(function() {
+        cssmenu.find('li ul').parent().addClass('has-sub');
+        if (settings.format != 'select') {
+          cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
+          $(this).find("#menu-button").on('click', function(){
+            $(this).toggleClass('menu-opened');
+            var mainmenu = $(this).next('ul');
+            if (mainmenu.hasClass('open')) { 
+              mainmenu.hide().removeClass('open');
+            }
+            else {
+              mainmenu.show().addClass('open');
+              if (settings.format === "dropdown") {
+                mainmenu.find('ul').show();
+              }
+            }
+          });
+
+          multiTg = function() {
+            cssmenu.find(".has-sub").prepend('<span class="submenu-button"></span>');
+            cssmenu.find('.submenu-button').on('click', function() {
+              $(this).toggleClass('submenu-opened');
+              if ($(this).siblings('ul').hasClass('open')) {
+                $(this).siblings('ul').removeClass('open').hide();
+              }
+              else {
+                $(this).siblings('ul').addClass('open').show();
+              }
+            });
+          };
+
+          if (settings.format === 'multitoggle') multiTg();
+          else cssmenu.addClass('dropdown');
+        }
+
+        else if (settings.format === 'select')
+        {
+          cssmenu.append('<select style="width: 100%"/>').addClass('select-list');
+          var selectList = cssmenu.find('select');
+          selectList.append('<option>' + settings.title + '</option>', {
+                                                         "selected": "selected",
+                                                         "value": ""});
+          cssmenu.find('a').each(function() {
+            var element = $(this), indentation = "";
+            for (i = 1; i < element.parents('ul').length; i++)
+            {
+              indentation += '-';
+            }
+            selectList.append('<option value="' + $(this).attr('href') + '">' + indentation + element.text() + '</option');
+          });
+          selectList.on('change', function() {
+            window.location = $(this).find("option:selected").val();
+          });
+        }
+
+        if (settings.sticky === true) cssmenu.css('position', 'fixed');
+
+        resizeFix = function() {
+          if ($(window).width() > settings.breakpoint) {
+            cssmenu.find('ul').show();
+            cssmenu.removeClass('small-screen');
+            if (settings.format === 'select') {
+              cssmenu.find('select').hide();
+            }
+            else {
+              cssmenu.find("#menu-button").removeClass("menu-opened");
+            }
+          }
+
+          if ($(window).width() <= settings.breakpoint && !cssmenu.hasClass("small-screen")) {
+            cssmenu.find('ul').hide().removeClass('open');
+            cssmenu.addClass('small-screen');
+            if (settings.format === 'select') {
+              cssmenu.find('select').show();
+            }
+          }
+        };
+        resizeFix();
+        return $(window).on('resize', resizeFix);
+
+      });
+  };
+})(jQuery);
+
+  (function($){
+  $(document).ready(function(){
+
+    $(window).load(function() {
+    $("#cssmenu").menumaker({
+      title: "Menu",
+      format: "dropdown"
+  });
+
+
+    $('#cssmenu').prepend("<div id='menu-indicator'></div>");
+
+    var foundActive = false, activeElement, indicatorPosition, indicator = $('#cssmenu #menu-indicator'), defaultPosition;
+
+    $("#cssmenu > ul > li").each(function() {
+      if ($(this).hasClass('active')) {
+      activeElement = $(this);
+      foundActive = true;
+      }
+    });
+
+    if (foundActive === false) {
+      activeElement = $("#cssmenu > ul > li").first();
+    }
+
+    defaultPosition = indicatorPosition = activeElement.position().left + activeElement.width()/2 - 5;
+    console.log(activeElement);
+    console.log(activeElement.position().left);
+    console.log(activeElement.width());
+    indicator.css("left", indicatorPosition);
+
+    $("#cssmenu > ul > li").hover(function() {
+      activeElement = $(this);
+      indicatorPosition = activeElement.position().left + activeElement.width()/2 - 5;
+      indicator.css("left", indicatorPosition);
+    }, 
+    function() {
+    indicator.css("left", defaultPosition);
+    });
+
+  });
+
+  });
+})(jQuery);
+
+</script>
+  <!--<nav class="navbar navbar-expand-lg navbar-light bg-white">-->
+  <!--    <img src="static/images/likelion_logo1" width="60em" height="22em" alt="likelion_logo">-->
+  <!--  <a class="navbar-brand" href="/">LikeLion at SKHU</a>-->
+  <!--  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+  <!--    <span class="navbar-toggler-icon"></span>-->
+  <!--  </button>-->
+    
+    
+    
+    <!--<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">-->
+    <!--    <ul class="navbar-nav ml-auto">-->
+    <!--        <li class="nav-item">-->
+    <!--          <a class="nav-link" href="/">Home</a>-->
+    <!--        </li>-->
+    <!--        <li class="nav-item">-->
+    <!--          <a class="nav-link" href="/tutors">Tutor</a>-->
+    <!--        </li>-->
+    <!--        <li class="nav-item">-->
+    <!--          <a class="nav-link" href="/members">Member</a>-->
+    <!--        </li>-->
+    <!--        <li class="nav-item">-->
+    <!--          <a class="nav-link" href="/portfolios">Portfolios</a>-->
+    <!--        </li>-->
+    <!--    </ul>-->
+    <!--</div>-->
+  </nav>
+  </div>
+  
+  {% block content %}
+  {% endblock %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!--<footer class="footer">-->
+<!--     <p class="float-right"><a href="#"><img src="static/images/up-button" width="40rem" height="40rem" ></a></p>-->
+<!--      <p>&copy; 2018 LikeLion at SKHU &middot;</p>-->
+<!--      <p>Developer</p>-->
+<!--      <p>Oh hyeSung</p>-->
+<!--      <p>Kim MyeongSeok</p>-->
+<!--      <p>Jang HeeSeung </p>-->
+<!--  </footer>-->
+
+<!--footer-->
+<div class="footer-main-div">
+<div class="footer-social-icons">
+	<ul>
+		<li><a href="https://www.facebook.com/SkhuLion/" target="_blank"><img src="static/images/facebook.png" height="35em" width="35em"></a></li>
+		<li><a href="https://www.instagram.com/nsap19" target="_blank"><img src="static/images/instagram.png" height="35em" width="35em"></a></li>
+		<li><a href="https://www.youtube.com/watch?v=p3Sfn-h9ioo" target="_blank"><img src="static/images/youtube.png" height="40em" width="35em"></a></li>
+		<li><a href="https://github.com/SkhuLikeLion6th/" target="_blank"><img src="static/images/github.png" height="35em" width="35em"></a></li>
+	</ul>
+</div>	
+ 
+<div class="footer-menu-one">
+	<ul>
+		<li><a href="/">Home</a></li>
+           <li><a href="/tutors">Tutor</a></li>
+           <li><a href="/members">Member</a></li>
+           <li><a href="/portfolios">Portfolios</a></li>
+ 	</ul>
+</div>
+ 
+<div class="footer-menu-two">
+	<ul>
+		<li><a href="#">Developer</a></li>
+    <li><a href="https://github.com/hyesungoh" target="_blank">오혜성</a></li>
+    <li><a href="https://github.com/myeongs14" target="_blank">김명석</a></li>
+    <li><a href="https://github.com/jangheeseung" target="_blank">장희승</a></li>
+ 	</ul>
+</div>
+ 
+ 
+</div>
+ 
+<div class="footer-bottom">
+	<p>Design by: LikeLion at SKHU</p>
+</div>
+</body>
+ 
+
+</html>

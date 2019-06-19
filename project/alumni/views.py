@@ -4,8 +4,7 @@ from .models import Member, Term, Port
 
 # 첫 화면
 def index(request):
-    terms = Term.objects
-    return render(request, 'index.html', {'terms':terms})
+    return render(request, 'index.html',)
 
 # 현재까지 멋쟁이 사자처럼의 회원
 def members(request):

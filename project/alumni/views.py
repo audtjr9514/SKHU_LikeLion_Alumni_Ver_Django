@@ -8,7 +8,9 @@ def index(request):
 
 # 현재까지 멋쟁이 사자처럼의 회원
 def members(request):
-    return render(request, 'members.html')
+    members = Member.objects.all()
+    terms = Term.objects.all()
+    return render(request, 'members.html',{'members':members})
 
 # 현재까지 멋쟁이 사자처럼의 운영진
 def tutors(request):

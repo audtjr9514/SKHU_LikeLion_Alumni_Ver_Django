@@ -3,4 +3,16 @@
 
 {% block content %}
 멤버 정보
+{% for member in members %}
+{{member.name}} <br>
+{{member.major}} <br>
+{{member.Enter_year}} <br>
+{{member.enter_term}} <br>
+{{member.tutor.first}} <br>
+{{member.image}} <br>
+<img width=100px, height=100px src="static/{{member.image}}">
+{% comment %} <img width=100px, height=100px src="{% static {{member.image}} %}"> {% endcomment %}
+{% comment %} {% static '{{member.image}}' %} <br> {% endcomment %}
+{{member.portfolio}} <br>
+{% endfor %}
 {% endblock %}

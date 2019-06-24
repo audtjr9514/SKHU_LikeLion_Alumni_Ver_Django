@@ -4,11 +4,9 @@
 {% block content %}
 <div class="container">
     <div class="row">
-    {% comment %} {% for term in terms %} {% endcomment %}
-        {% for members in memberss %}
-        {% for member in members %}
-        {% comment %} {% if member.enter_term == 5 %} {% endcomment %}
-            {% comment %} <hr width = "90%"> {% endcomment %}
+    {% for term in terms %}
+        {% if term.enter_members.all.count > 0 %}
+            {% for member in term.enter_members.all %}
             <!--member card-->
             <div class="col-sm-3">
                 <div class="card" style="width: 16rem; margin-top: 1rem; margin-bottom: 1rem;">
@@ -16,13 +14,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ member.name }}</h5>
                         <p class="card-text">{{ member.enter_term }}기</p>
-                        <!-- modal button-->
-                        {% comment %} <button class: "btn btn-outline-fill",
-                        data: { toggle: "modal", target: "#Modal" + member.id.to_s } do
-                        content_tag(strong, 'View detail')
-                        end
-                        > {% endcomment %}
-                        <button class="btn btn-outline-fill" data-toggle="modal" data-target="#member{{member.id}}" href='#동방'>view detail</button>
+                        <button class="btn btn-outline-fill" data-toggle="modal" data-target="#member{{member.id}}">view detail</button>
                         <!--view detail modal -->
                         <div class="modal fade bd-example-modal-lg" id="member{{member.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">6
@@ -70,10 +62,10 @@
                     </div>
                 </div>
             </div>
-        {% comment %} {% endif %} {% endcomment %}
-        {% endfor %}    
-        <hr height="100px" width = "100%">
-        {% endfor %}
+            {% endfor %}    
+            <hr height="100px" width = "100%">
+            {% endif %}
+        {% endfor %} 
     </div>
 </div>
 

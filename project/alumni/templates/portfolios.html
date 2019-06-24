@@ -2,5 +2,81 @@
 {% load staticfiles%}
 
 {% block content %}
-포트폴리오
+<div class="container">
+    <hr width = "0%">
+</div>
+{% for port in ports%}
+<div class="row">
+    <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card mb-3">
+            {% if port.image.empty %}
+                <img class="card-img-top" src="{% static 'images/port_sample.svg' %}" alt="None Image for this project">
+            {% else %}
+                <img class="card-img-top" src="static/{{port.Image}}" alt="{{ port.title}}">
+            {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{port.title}}</h5>
+                    <p class="card-text">{{port.content}}</p>
+                    {% comment %} <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> {% endcomment %}
+                </div>
+                <div class="card-footer text-muted align-middle">
+                {% for member in port.port_members.all %}
+                    <a href="" class="text-muted" data-toggle="modal" data-target="#member{{member.id}}">
+                    {{ member.name }}</a>
+                    <!--view detail modal -->
+                    <div class="modal fade bd-example-modal-lg" id="member{{member.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                        {{ member.name }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% if member.tutor.count > 0 %}
+                                        {% if member.tutor.count > 1 %}
+                                            <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                            <p>멋쟁이 사자처럼 {{ member.enter_term }}기에 학생을 수료하고 {% for tutor in member.tutor.all%} {{tutor}}{% endfor %}기 운영진으로 활동했습니다.</p>
+                                        {% else %}
+                                            <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                            <p>멋쟁이 사자처럼 {{ member.enter_term }}기에 학생을 수료하고 {{ member.tutor.first }}기 운영진으로 활동했습니다.</p>
+                                        {% endif %}
+                                    {% else %}
+                                        <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                        <p>멋쟁이 사자처럼 {{ member.enter_term }}기 학생으로 수료했습니다.</p>
+                                    {% endif %}
+                                    <h5 class="modal-title" id="exampleModalLabel"> 참여 프로젝트 </h5>
+                                    {% if member.portfolio.count > 0 %}
+                                        <table class="table">
+                                            {% for port in member.portfolio.all %}
+                                                <tr>
+                                                    <th>{{ port.title }}</th>
+                                                    <td>{{ port.content }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </table>
+                                    {% endif %}                            
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal end -->
+                {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr width = "0%">
+{% endfor %}
+
+
+
 {% endblock %}

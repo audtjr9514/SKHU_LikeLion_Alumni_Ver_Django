@@ -33,3 +33,11 @@
 ## DataBase Designing
 
 ![home](https://github.com/audtjr9514/SKHU_LikeLion_Alumni_Ver_Django/blob/master/DB_Designing.JPG)
+
+
+
+## Developement Details
+
+- ##### virtual environment : skhull
+
+- ##### **admin** : admin_skhull / admin0925

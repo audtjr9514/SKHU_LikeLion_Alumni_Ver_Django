@@ -2,17 +2,82 @@
 {% load staticfiles%}
 
 {% block content %}
-멤버 정보
-{% for member in members %}
-{{member.name}} <br>
-{{member.major}} <br>
-{{member.Enter_year}} <br>
-{{member.enter_term}} <br>
-{{member.tutor.first}} <br>
-{{member.image}} <br>
-<img width=100px, height=100px src="static/{{member.image}}">
-{% comment %} <img width=100px, height=100px src="{% static {{member.image}} %}"> {% endcomment %}
-{% comment %} {% static '{{member.image}}' %} <br> {% endcomment %}
-{{member.portfolio}} <br>
-{% endfor %}
+<div class="container">
+    <div class="row">
+    {% comment %} {% for term in terms %} {% endcomment %}
+        {% for members in memberss %}
+        {% for member in members %}
+        {% comment %} {% if member.enter_term == 5 %} {% endcomment %}
+            {% comment %} <hr width = "90%"> {% endcomment %}
+            <!--member card-->
+            <div class="col-sm-3">
+                <div class="card" style="width: 16rem; margin-top: 1rem; margin-bottom: 1rem;">
+                    <img class="card-img-top" src="static/{{member.image}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ member.name }}</h5>
+                        <p class="card-text">{{ member.enter_term }}기</p>
+                        <!-- modal button-->
+                        {% comment %} <button class: "btn btn-outline-fill",
+                        data: { toggle: "modal", target: "#Modal" + member.id.to_s } do
+                        content_tag(strong, 'View detail')
+                        end
+                        > {% endcomment %}
+                        <button class="btn btn-outline-fill" data-toggle="modal" data-target="#member{{member.id}}" href='#동방'>view detail</button>
+                        <!--view detail modal -->
+                        <div class="modal fade bd-example-modal-lg" id="member{{member.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">6
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            멋쟁이 사자처럼 {{ member.enter_term }}기<br>
+                                            {{ member.name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {% if member.tutor.count > 0 %}
+                                            {% if member.tutor.count > 1 %}
+                                                <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                                <p>멋쟁이 사자처럼 {{ member.enter_term }}기에 학생을 수료하고 {% for tutor in member.tutor.all%} {{tutor}}{% endfor %}기 운영진으로 활동했습니다.</p>
+                                            {% else %}
+                                                <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                                <p>멋쟁이 사자처럼 {{ member.enter_term }}기에 학생을 수료하고 {{ member.tutor.first }}기 운영진으로 활동했습니다.</p>
+                                            {% endif %}
+                                        {% else %}
+                                            <p><strong>20{{ member.enter_year }}</strong>년도에 <strong>{{ member.major }}</strong>에 입학하여</p>
+                                            <p>멋쟁이 사자처럼 {{ member.enter_term }}기 학생으로 수료했습니다.</p>
+                                        {% endif %}
+                                        <h5 class="modal-title" id="exampleModalLabel"> 참여 프로젝트 </h5>
+                                        {% if member.portfolio.count > 0 %}
+                                            <table class="table">
+                                                {% for port in member.portfolio.all %}
+                                                <tr>
+                                                    <th>{{ port.title }}</th>
+                                                    <td>{{ port.content }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                        {% endif %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- modal end -->
+                    </div>
+                </div>
+            </div>
+        {% comment %} {% endif %} {% endcomment %}
+        {% endfor %}    
+        <hr height="100px" width = "100%">
+        {% endfor %}
+    </div>
+</div>
+
+<br>
+
 {% endblock %}
+

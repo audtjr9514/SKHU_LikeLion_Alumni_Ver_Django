@@ -2,5 +2,26 @@
 {% load staticfiles%}
 
 {% block content %}
-운영진
+<div class="container">
+    <div class="row">
+        {% for term in terms%}
+        {% if term.tutors.all.count > 0 %}
+            {% for tutor in term.tutors.all%}
+            <div class="col-sm-3">
+                <div class="card" style="width: 387; margin-top: 1rem; margin-bottom: 1rem;">
+                    <img class="card-img-top" src="/static/{{tutor.image}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{tutor.name}}</h5>
+                        <p class="card-text">
+                        {{tutor.enter_term}}기에 배워<br>
+                        {{term}}기 운영진으로 활동</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <hr width = "90%">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

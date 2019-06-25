@@ -4,12 +4,14 @@
 {% block content %}
 <div class="container">
     <div class="row">
+    <hr height="100px" width = "100%">
     {% for term in terms %}
         {% if term.enter_members.all.count > 0 %}
             {% for member in term.enter_members.all %}
             <!--member card-->
             <div class="col-sm-3">
-                <div class="card" style="width: 16rem; margin-top: 1rem; margin-bottom: 1rem;">
+                <div class="card" style="width: 387; margin-top: 1rem; margin-bottom: 1rem;">
+                <div>
                     <img class="card-img-top" src="static/{{member.image}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ member.name }}</h5>
@@ -60,6 +62,7 @@
                         </div>
                         <!-- modal end -->
                     </div>
+                </div>
                 </div>
             </div>
             {% endfor %}    
